@@ -1,0 +1,3 @@
+# Dev / reproduction extras. The runtime core (requirements.txt) stays numpy-only.
+pytest        # test suite (tests/)
+matplotlib    # figure generation (figures/make_figures.py)

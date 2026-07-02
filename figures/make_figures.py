@@ -6,9 +6,15 @@ CSVs in ``../experiments/``.  Labels are language-switched:
     python make_figures.py ru   -> article/figures/      (Russian labels)
     python make_figures.py en   -> article/figures_en/   (English labels)
 
-Default is ``ru``.  Journal style: multi-panel figures carry only bold panel
-labels (а)/(б)/(в); all descriptive text lives in the LaTeX caption.  Figures are
-sized close to the column width so the in-figure type renders at ~10-11 pt.
+Default is ``ru``.  Output location: if the sibling ``article/`` tree exists (the
+in-repository authoring workflow) the figures go to ``article/figures[_en]`` as
+before; otherwise (a standalone clone of ``code/`` only) they fall back to
+``figures/out/<lang>/``.  An explicit destination can be forced with
+``--out PATH`` (or ``--out=PATH``).
+
+Journal style: multi-panel figures carry only bold panel labels (а)/(б)/(в); all
+descriptive text lives in the LaTeX caption.  Figures are sized close to the
+column width so the in-figure type renders at ~10-11 pt.
 """
 
 from __future__ import annotations
@@ -26,9 +32,34 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent))           # code/  -> baselines.py
 from baselines import sinkhorn, coupling_retention   # noqa: E402
 
-LANG = sys.argv[1] if len(sys.argv) > 1 and sys.argv[1] in ("ru", "en") else "ru"
+def _parse_args(argv):
+    """Return (lang, out_override) from argv; tolerant, order-independent."""
+    lang, out_override = "ru", None
+    rest, i = argv[1:], 0
+    while i < len(rest):
+        tok = rest[i]
+        if tok in ("ru", "en"):
+            lang = tok
+        elif tok == "--out":
+            i += 1
+            out_override = rest[i] if i < len(rest) else None
+        elif tok.startswith("--out="):
+            out_override = tok.split("=", 1)[1]
+        i += 1
+    return lang, out_override
+
+
+LANG, _OUT_OVERRIDE = _parse_args(sys.argv)
 EXP = HERE.parent / "experiments"
-OUT = HERE.parents[1] / "article" / ("figures" if LANG == "ru" else "figures_en")
+
+_SUB = "figures" if LANG == "ru" else "figures_en"
+if _OUT_OVERRIDE:
+    OUT = Path(_OUT_OVERRIDE)
+else:
+    _ARTICLE = HERE.parents[1] / "article"
+    # Preserve the in-repo authoring workflow when the article tree is present;
+    # otherwise fall back to a self-contained output dir inside the repo.
+    OUT = (_ARTICLE / _SUB) if _ARTICLE.is_dir() else (HERE / "out" / LANG)
 OUT.mkdir(parents=True, exist_ok=True)
 
 PAN = ["(а)", "(б)", "(в)"] if LANG == "ru" else ["(a)", "(b)", "(c)"]
@@ -143,6 +174,13 @@ def _read_grid(path):
 
 
 def ris4():
+    missing = [p.name for p in (EXP / "phase_null_ratio.csv",
+                                EXP / "phase_ewma_ratio.csv") if not p.exists()]
+    if missing:
+        print(f"  [ris4] SKIPPED: missing {', '.join(missing)} in {EXP}.\n"
+              f"        Run `python phase_map.py` first to generate the "
+              f"phase-map CSVs, then re-run this script.")
+        return
     dn, cn, Gn = _read_grid(EXP / "phase_null_ratio.csv")
     de, ce, Ge = _read_grid(EXP / "phase_ewma_ratio.csv")
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(6.6, 3.0), constrained_layout=True)
