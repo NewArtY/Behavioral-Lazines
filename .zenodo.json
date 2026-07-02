@@ -1,0 +1,32 @@
+{
+  "title": "behavioral-laziness: least-action regularization of transfer-operator trajectories",
+  "description": "<p>Self-contained numpy core and synthetic reproduction accompanying the paper \"Recovering the transfer operator of a multicluster open system from aggregate data: the least-action principle on its trajectory\" (informal name: \"Behavioral Laziness\").</p><p>Recovering a transfer operator from two aggregate snapshots is severely under-determined, so the solution set is an affine manifold on which minimum-norm (Tikhonov) regularization is not neutral &mdash; it underestimates self-retention. This package implements the proposed least-action prior on the operator trajectory: null-space projection (hard, preserves the observed macro increment A&middot;P exactly) and EWMA (soft), together with entropic optimal-transport baselines (Sinkhorn), an applicability phase map (delta &times; rho), and causal inner-CV selection of the regularization strength &lambda;. All demos are deterministic (seeded) and CPU-only. Domain runs (labour market, radiation-damped relativistic-electron ensemble) depend on closed data and separate solver packages and are not included in this archive.</p>",
+  "upload_type": "software",
+  "access_right": "open",
+  "license": "MIT",
+  "language": "eng",
+  "version": "1.0.0",
+  "creators": [
+    {
+      "name": "Nevecherya, Artyom Pavlovich",
+      "affiliation": "Kuban State University, Krasnodar, Russia",
+      "orcid": "0000-0001-6736-4691"
+    }
+  ],
+  "keywords": [
+    "inverse problem",
+    "Tikhonov regularization",
+    "non-identifiability",
+    "transfer operator",
+    "Markov chain",
+    "multicluster system",
+    "least action",
+    "null-space projection",
+    "optimal transport",
+    "Sinkhorn",
+    "time-series forecasting",
+    "reproducibility",
+    "labour-market segmentation",
+    "radiation reaction"
+  ]
+}

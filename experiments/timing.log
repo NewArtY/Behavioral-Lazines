@@ -1,0 +1,55 @@
+
+=== explore_baselines run 2026-06-20 17:37:22 ===
+rolling_baselines okved1: 4.9 s
+rolling_baselines okved2: 11.4 s
+total: 16.5 s
+phase_map (60 seeds): 2.0 s
+phase_map (60 seeds): 2.0 s
+phase_map (60 seeds): 1.9 s
+phase_map (60 seeds): 2.0 s
+lambda_cv: 6.7 s
+
+=== laziness_operator_series 2026-06-20 18:04:06 ===
+physics laziness: 6.0 s
+
+=== laziness_operator_series 2026-06-20 18:06:42 ===
+physics laziness: 17.0 s
+
+=== econ_significance 2026-06-20 23:36:22 ===
+econ significance (okved2, 3 holdouts): 6.0 s
+
+=== physics_relaxation_rate 2026-06-20 23:38:48 ===
+physics relaxation rate: 5.3 s  (Lambda=0.7200, Lambda_rec_ulam=0.2705, ratio=0.38)
+
+=== physics_relaxation_rate 2026-06-20 23:41:05 ===
+physics relaxation rate: 11.6 s  (Lambda=0.7200, Lambda_rec_ulam=0.6812, ratio=0.95)
+
+=== physics_relaxation_rate 2026-06-21 00:42:29 ===
+physics relaxation rate: 32.1 s  (Lambda=0.7200, Lambda_rec_ulam=0.6812, ratio=0.95)
+
+=== physics_relaxation_rate 2026-06-21 00:44:30 ===
+physics relaxation rate: 45.5 s  (Lambda=0.7200, Lambda_rec_ulam=0.6812, ratio=0.95)
+
+=== physics_relaxation_rate 2026-06-21 00:46:09 ===
+physics relaxation rate: 26.8 s  (Lambda=0.7200, Lambda_rec_ulam=0.6812, ratio=0.95)
+
+=== econ_significance 2026-06-21 00:53:01 ===
+econ significance (okved2, 3 holdouts): 21.9 s
+
+=== econ_significance 2026-06-21 00:53:35 ===
+econ significance (okved2, 3 holdouts): 16.1 s
+
+=== econ_significance 2026-06-21 00:54:36 ===
+econ significance (okved2, 3 holdouts): 16.4 s
+
+=== math_checks 2026-06-21 01:12:07 ===
+math checks (rank, dim ker, sigma_min+): 0.06 s; all_ok=True
+
+=== math_checks 2026-06-21 23:09:35 ===
+math checks (rank, dim ker, sigma_min+): 0.05 s; all_ok=True
+
+=== physics_relaxation_rate 2026-06-21 23:10:25 ===
+physics relaxation rate: 28.2 s  (Lambda=0.7200, Lambda_rec_ulam=0.6812, ratio=0.95)
+
+=== econ_significance 2026-06-21 23:10:57 ===
+econ significance (okved2, 3 holdouts): 18.0 s

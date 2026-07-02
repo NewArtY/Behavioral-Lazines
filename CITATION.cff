@@ -1,0 +1,61 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata below."
+title: "behavioral-laziness: least-action regularization of transfer-operator trajectories"
+abstract: >-
+  Self-contained numpy core and synthetic reproduction accompanying the paper
+  "Recovering the transfer operator of a multicluster open system from aggregate
+  data: the least-action principle on its trajectory" (informal name: "Behavioral
+  Laziness"). The recovery of a transfer operator from two aggregate snapshots is
+  severely under-determined, so the solution set is an affine manifold on which
+  minimum-norm (Tikhonov) regularization is not neutral — it underestimates
+  self-retention. This package implements the proposed least-action prior on the
+  operator trajectory: null-space projection (hard, preserves the observed macro
+  increment A·P exactly) and EWMA (soft), together with entropic optimal-transport
+  baselines (Sinkhorn), an applicability phase map (delta × rho), and causal
+  inner-CV selection of the regularization strength λ. All demos are deterministic
+  (seeded) and CPU-only.
+type: software
+authors:
+  - family-names: Nevecherya
+    given-names: "Artyom Pavlovich"
+    orcid: "https://orcid.org/0000-0001-6736-4691"
+    email: artiom1989@mail.ru
+    affiliation: "Kuban State University, Krasnodar, Russia"
+version: "1.0.0"
+date-released: "2026-07-02"
+license: MIT
+keywords:
+  - inverse problem
+  - Tikhonov regularization
+  - non-identifiability
+  - transfer operator
+  - Markov chain
+  - multicluster system
+  - least action
+  - null-space projection
+  - optimal transport
+  - Sinkhorn
+  - time-series forecasting
+  - reproducibility
+  - labour-market segmentation
+  - radiation reaction
+# repository-code: "https://github.com/<user>/behavioral-laziness"  # TODO: set after publishing to GitHub
+# url: "https://github.com/<user>/behavioral-laziness"              # TODO
+# doi: "10.5281/zenodo.XXXXXXX"        # TODO: fill with the Zenodo concept DOI after the first release
+#
+# Once the article is published/accepted, uncomment and complete the block below
+# (add volume/issue/pages/doi) so citations resolve to the paper, not the archive:
+# preferred-citation:
+#   type: article
+#   title: "Recovering the transfer operator of a multicluster open system from aggregate data: the least-action principle on its trajectory"
+#   authors:
+#     - family-names: Nevecherya
+#       given-names: "Artyom Pavlovich"
+#       orcid: "https://orcid.org/0000-0001-6736-4691"
+#   journal: "Mathematical Modeling and Computational Methods"  # Математическое моделирование и численные методы (BMSTU)
+#   year: 2026
+#   # volume:
+#   # issue:
+#   # start:            # first page
+#   # end:              # last page
+#   # doi:
