@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it using the metadata below."
-title: "behavioral-laziness: least-action regularization of transfer-operator trajectories"
+title: "Behavioral-laziness: least-action regularization of transfer-operator trajectories"
 abstract: >-
   Self-contained numpy core and synthetic reproduction accompanying the paper
   "Recovering the transfer operator of a multicluster open system from aggregate

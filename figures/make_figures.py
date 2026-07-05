@@ -118,17 +118,19 @@ def ris1():
 def ris2():
     methods = _(["наивный", "исходное", "мягкое", "нуль:0,5"],
                 ["naive", "raw", "ewma", "null:0.5"])
-    reliab = [0.276, 0.293, 0.228, 0.309]
+    # curated 2017-2024 panel (5 holdouts 2020-2024): rerun_curated_2024.out
+    reliab = [0.273, 0.302, 0.268, 0.302]
     x = np.arange(len(methods))
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(6.2, 2.7))
     c = ["0.6", "#7f7f7f", "#d62728", "#2ca02c"]
     ax1.bar(x, reliab, color=c)
-    ax1.axhline(0.276, color="0.4", ls="--", lw=0.8)
+    ax1.axhline(0.273, color="0.4", ls="--", lw=0.8)
     ax1.set_xticks(x); ax1.set_xticklabels(methods, rotation=22, ha="right")
     ax1.set_ylabel(r"$\eta_2$")
     ax1.set_ylim(0, 0.36)
     _panel(ax1, 0)
-    rv = [1e-16, 1e-16, 6.96e-2, 2.58e-15]
+    # naive: balance residual undefined; raw: exactly 0 -> no bars on log axis
+    rv = [0.0, 0.0, 1.22e-1, 5.22e-15]
     ax2.bar(x, rv, color=c)
     ax2.set_yscale("log")
     ax2.set_xticks(x); ax2.set_xticklabels(methods, rotation=22, ha="right")
@@ -143,8 +145,8 @@ def ris3():
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(6.2, 2.7))
     ax1.bar([0, 1], [0.114, 1.000], color=["#7f7f7f", "#2ca02c"])
     ax1.set_xticks([0, 1])
-    ax1.set_xticklabels(_([r"станд. $\bar x{=}0$", r"лень $\bar x{=}P_0$"],
-                          [r"standard $\bar x{=}0$", r"lazy $\bar x{=}P_0$"]),
+    ax1.set_xticklabels(_([r"станд. $\bar x{=}0$", r"инерц. $\bar x{=}P_0$"],
+                          [r"standard $\bar x{=}0$", r"inertial $\bar x{=}P_0$"]),
                         rotation=12, ha="center")
     ax1.set_ylabel(_(r"среднее удержание $P^{**}$", r"mean retention $P^{**}$"))
     ax1.set_ylim(0, 1.12)

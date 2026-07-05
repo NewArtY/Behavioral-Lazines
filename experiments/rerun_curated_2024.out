@@ -1,0 +1,167 @@
+### rerun on okved2curated: 2026-07-05 16:00:49
+
+##############################################################################
+# A. regulariser sweep + balance residuals
+##############################################################################
+
+[energy] okved2curated: behavioural action sum||dP~||^2 and operator perturbation
+     variant       energy    e/e0   ||Xs-X||/||X||  max|A@Xs-A@X|/|A@X|
+         raw      0.03792   1.000           0.0000           0.0000e+00
+      null:1      0.01927   0.508           0.0423           2.6619e-14
+    ewma:0.5     0.008835   0.233           0.0247           2.9131e-01
+    ewma:0.9    0.0005379   0.014           0.0548           9.5078e-01
+
+==========================================================================
+DOMAIN okved2curated: rolling-origin MEAN over 5 holdouts (periods 2020..2024)
+==========================================================================
+          naive (anchor)   MAE=  48.67  reliab=0.273  dir_acc=0.000
+  -- scheme: per_component
+            raw   MAE=  51.47 (d +0.00)  reliab=0.288  dir_acc=0.654
+       null:0.5   MAE=  53.44 (d +1.97)  reliab=0.283  dir_acc=0.659  <D>
+         null:1   MAE=  53.73 (d +2.26)  reliab=0.278  dir_acc=0.673  <D>
+       ewma:0.3   MAE=  48.27 (d -3.20)  reliab=0.327  dir_acc=0.693  <MRD>
+       ewma:0.5   MAE=  51.77 (d +0.31)  reliab=0.288  dir_acc=0.595
+       ewma:0.7   MAE=  62.23 (d+10.76)  reliab=0.239  dir_acc=0.400
+       ewma:0.9   MAE=  81.41 (d+29.94)  reliab=0.205  dir_acc=0.415
+  -- scheme: common
+            raw   MAE=  51.76 (d +0.00)  reliab=0.302  dir_acc=0.595
+       null:0.5   MAE=  54.48 (d +2.72)  reliab=0.302  dir_acc=0.537
+         null:1   MAE=  54.41 (d +2.65)  reliab=0.298  dir_acc=0.522
+       ewma:0.3   MAE=  55.05 (d +3.30)  reliab=0.268  dir_acc=0.541
+       ewma:0.5   MAE=  54.22 (d +2.47)  reliab=0.268  dir_acc=0.571
+       ewma:0.7   MAE=  62.36 (d+10.60)  reliab=0.229  dir_acc=0.420
+       ewma:0.9   MAE=  81.14 (d+29.38)  reliab=0.200  dir_acc=0.405
+  -- scheme: lowrank
+            raw   MAE=  55.63 (d +0.00)  reliab=0.259  dir_acc=0.532
+       null:0.5   MAE=  53.78 (d -1.85)  reliab=0.249  dir_acc=0.502  <M>
+         null:1   MAE=  61.57 (d +5.94)  reliab=0.210  dir_acc=0.439
+       ewma:0.3   MAE=  56.60 (d +0.97)  reliab=0.239  dir_acc=0.468
+       ewma:0.5   MAE=  62.98 (d +7.35)  reliab=0.224  dir_acc=0.410
+       ewma:0.7   MAE=  70.61 (d+14.99)  reliab=0.220  dir_acc=0.395
+       ewma:0.9   MAE=  84.84 (d+29.21)  reliab=0.195  dir_acc=0.405
+
+==============================================================================
+DOMAIN okved2curated: baselines, rolling-origin MEAN over 5 holdouts
+==============================================================================
+  naive (anchor): MAE=48.67  reliab=0.273  dir_acc=0.000
+
+  trajectory regulariser -- balance corruption & energy (scheme-independent):
+       variant  balance_resid  energy/e0
+           raw       0.00e+00      1.000
+      ewma:0.5       1.22e-01      0.216
+      null:0.5       5.22e-15      0.693
+        null:1       8.76e-15      0.610
+
+  scheme: per_component
+       variant      MAE   reliab  dir_acc
+           raw    51.47    0.288    0.654
+      ewma:0.5    51.77    0.288    0.595
+      null:0.5    53.44    0.283    0.659
+        null:1    53.73    0.278    0.673
+
+  scheme: common
+       variant      MAE   reliab  dir_acc
+           raw    51.76    0.302    0.595
+      ewma:0.5    54.22    0.268    0.571
+      null:0.5    54.48    0.302    0.537
+        null:1    54.41    0.298    0.522
+
+  scheme: lowrank
+       variant      MAE   reliab  dir_acc
+           raw    55.63    0.259    0.532
+      ewma:0.5    62.98    0.224    0.410
+      null:0.5    53.78    0.249    0.502
+        null:1    61.57    0.210    0.439
+
+##############################################################################
+# B. baselines + significance battery
+##############################################################################
+==============================================================================
+  okved2curated significance: 5 holdouts ['2020', '2021', '2022', '2023', '2024'], 41 indicators each
+==============================================================================
+
+  rolling-origin means (scheme=common); reliab tau=1/2/5%:
+         method     MAE  sMAPE%   MASE  rel@1  rel@2  rel@5    dir
+          naive   48.67   11.64   1.00  0.122  0.273  0.468  0.000
+            raw   51.76   12.19   1.08  0.137  0.302  0.488  0.595
+           ewma   54.22   11.04   1.15  0.127  0.268  0.473  0.571
+           null   54.48   12.80   1.13  0.137  0.302  0.478  0.537
+       rw_drift   46.38   10.31   0.94  0.185  0.298  0.512  0.663
+            ar1   65.40   15.47   1.40  0.107  0.229  0.449  0.332
+            ets   53.52   12.77   1.12  0.146  0.283  0.493  0.580
+    shift_share   50.29   10.96   1.02  0.151  0.259  0.473  0.537
+
+  [DM] Diebold-Mariano (HLN) on holdout MAE, H=5 (exploratory):
+    naive vs         raw: DM=+0.667  p=0.542
+    naive vs        ewma: DM=+1.034  p=0.360
+    naive vs        null: DM=+0.842  p=0.447
+    naive vs    rw_drift: DM=-0.433  p=0.688
+    naive vs         ar1: DM=+1.569  p=0.192
+    naive vs         ets: DM=+0.789  p=0.474
+    naive vs shift_share: DM=+0.384  p=0.720
+
+  [Permutation] within-holdout sign-flip on |err| diff (naive-method):
+    naive -         raw: d|err|=-3.09  p=0.436  (naive better)
+    naive -        ewma: d|err|=-5.56  p=0.433  (naive better)
+    naive -        null: d|err|=-5.81  p=0.436  (naive better)
+    naive -    rw_drift: d|err|=+2.28  p=0.747  (method better)
+    naive -         ar1: d|err|=-16.73  p=0.189  (naive better)
+    naive -         ets: d|err|=-4.85  p=0.374  (naive better)
+    naive - shift_share: d|err|=-1.62  p=0.873  (naive better)
+
+  [PT] Pesaran-Timmermann + binomial (pooled moved indicators):
+          naive: hit=0.000 (k=0/205)  binom p=1.000  PT=n/a
+            raw: hit=0.595 (k=122/205)  binom p=0.004  PT=+2.19 p=0.029
+           ewma: hit=0.571 (k=117/205)  binom p=0.025  PT=+1.90 p=0.057
+           null: hit=0.537 (k=110/205)  binom p=0.164  PT=+0.78 p=0.435
+       rw_drift: hit=0.663 (k=136/205)  binom p=0.000  PT=+3.73 p=0.000
+            ar1: hit=0.332 (k=68/205)  binom p=1.000  PT=-4.00 p=0.000
+            ets: hit=0.580 (k=119/205)  binom p=0.013  PT=+1.38 p=0.167
+    shift_share: hit=0.537 (k=110/205)  binom p=0.164  PT=-1.47 p=0.142
+
+  [Bootstrap] cluster (by holdout, G=5) 95% CI, null - naive:
+    d|err|  (null-naive): +5.81  CI[-4.17,+17.85]  (n.s.)
+    d reliab (null-naive): +0.029  CI[-0.044,+0.102]  (n.s.)
+
+  [Holm] 14 raw p-values (perm + PT families):
+       PT/ar1         p=0.0001  thr=0.0036  -> SIGNIFICANT
+       PT/rw_drift    p=0.0002  thr=0.0038  -> SIGNIFICANT
+       PT/raw         p=0.0285  thr=0.0042  -> n.s. (and all below stop)
+    smallest raw p = 0.0001 (('PT', 'ar1'))  any significant after Holm: True
+
+##############################################################################
+# C. levers / ablation / correlation / robustness
+##############################################################################
+
+[#6a] okved2curated: implied retention vs internal levers (x_bar, alpha)
+    standard (x_bar=0)        retention=0.083
+    absolute_lazy (x_bar=P0)  retention=0.083
+    alpha=0.001              retention=0.083
+    alpha=0.01               retention=0.083
+    alpha=0.1                retention=0.083
+    alpha=1                  retention=0.083
+    => internal levers leave retention ~invariant (needs null-space move)
+
+[#6b] okved2curated: static (fixed anchor) vs dynamic (toward prev) null-space
+         variant      MAE   reliab  dMAE_vs_raw  bal_resid
+             raw    51.76    0.302        +0.00    0.0e+00
+          static    55.11    0.302        +3.35    1.3e-14
+         dynamic    54.41    0.298        +2.65    2.0e-14
+      => static (fixed anchor) ~ neutral; dynamic (temporal coupling) moves forecast
+
+[#7] okved2curated: energy<->skill correlation (pooled over schemes/lambda/holdouts)
+    null: corr(energy_ratio, reliab)=+0.12  corr(energy_ratio, MAE)=+0.55  (n=60)
+    ewma: corr(energy_ratio, reliab)=+0.30  corr(energy_ratio, MAE)=-0.41  (n=45)
+    => null: lower energy (more laziness) <-> higher reliab / lower MAE (mechanism)
+
+[#8] okved2curated: robustness of null-space gain to solver alpha/eps (common scheme, rolling MEAN)
+        alpha     eps  reliab_raw  reliab_null  MAE_raw  MAE_null  bal_resid
+        0.001   0.001       0.302        0.302    51.76     54.48    1.2e-14
+        0.001  0.0001       0.302        0.302    51.75     54.49    1.0e-14
+         0.01   0.001       0.307        0.293    54.84     57.81    1.2e-14
+         0.01  0.0001       0.302        0.302    54.51     57.84    1.1e-14
+          0.1   0.001       0.302        0.302    54.38     54.34    8.8e-15
+          0.1  0.0001       0.298        0.302    52.09     54.38    8.8e-15
+      => null-space reliab gain + ~zero balance residual hold across settings
+
+[time] total: 232.9 s
