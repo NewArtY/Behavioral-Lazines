@@ -21,8 +21,8 @@ authors:
     orcid: "https://orcid.org/0000-0001-6736-4691"
     email: artiom1989@mail.ru
     affiliation: "Kuban State University, Krasnodar, Russia"
-version: "1.0.0"
-date-released: "2026-07-02"
+version: "1.1.0"
+date-released: "2026-07-05"
 license: MIT
 keywords:
   - inverse problem

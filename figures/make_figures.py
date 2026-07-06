@@ -116,8 +116,8 @@ def ris1():
 
 # --- ris2: labour baseline -- balance residual + reliability (OKVED-2) --------
 def ris2():
-    methods = _(["наивный", "исходное", "мягкое", "нуль:0,5"],
-                ["naive", "raw", "ewma", "null:0.5"])
+    methods = _(["наивный", "исходное", "мягкое", "нуль (λ=0,5)"],
+                ["naive", "raw", "ewma", "null (λ=0.5)"])
     # curated 2017-2024 panel (5 holdouts 2020-2024): rerun_curated_2024.out
     reliab = [0.273, 0.302, 0.268, 0.302]
     x = np.arange(len(methods))
@@ -156,8 +156,8 @@ def ris3():
     ax2.bar(range(3), [2.7e-15, 5.7e-15, 5.96e-1], color=["#2ca02c", "#2ca02c", "#d62728"])
     ax2.set_yscale("log")
     ax2.set_xticks(range(3))
-    ax2.set_xticklabels(_(["нуль:0,5", "нуль:1", "мягкое:0,5"],
-                          ["null:0.5", "null:1", "ewma:0.5"]),
+    ax2.set_xticklabels(_(["нуль (λ=0,5)", "нуль (λ=1)", "мягкое (λ=0,5)"],
+                          ["null (λ=0.5)", "null (λ=1)", "ewma (λ=0.5)"]),
                         rotation=18, ha="right")
     ax2.set_ylabel(_("невязка баланса", "balance residual"))
     ax2.set_ylim(1e-16, 1.0)
@@ -196,8 +196,10 @@ def ris4():
         _panel(ax, k)
         for i in range(G.shape[0]):
             for j in range(G.shape[1]):
+                # white digits on the dark ends of the RdBu_r scale (readability)
+                dark = abs(G[i, j] - 1.0) > 0.35
                 ax.text(j, i, f"{G[i,j]:.2f}", ha="center", va="center",
-                        fontsize=9, color="black")
+                        fontsize=9, color="white" if dark else "black")
     fig.colorbar(im, ax=[ax1, ax2], fraction=0.045, pad=0.02,
                  label=_("отношение ошибок\n(сглаж./исходное)", "error ratio\n(smoothed / raw)"))
     _save(fig, "ris4", tight=False)
