@@ -1,0 +1,40 @@
+==========================================================================
+  STRUCTURE-PRESERVING applicability map (valid balance A, n=4);
+  rho = observation noise on levels N (not abstract matrix rotation)
+==========================================================================
+
+  NULL-space: mean error ratio (null/raw)  [<1 = helps]  (rows: delta trend; cols: rho jitter)
+    delta\rho   0.000   0.020   0.050   0.100   0.200
+        0.000   1.000   1.000   0.998   0.988   0.948
+        0.020   1.000   1.000   0.998   0.988   0.948
+        0.050   1.000   1.000   0.998   0.988   0.949
+        0.100   1.000   1.000   0.998   0.989   0.949
+        0.200   0.999   1.000   0.998   0.989   0.951
+
+  NULL-space: win rate (frac seeds ratio<1)  (rows: delta trend; cols: rho jitter)
+    delta\rho   0.000   0.020   0.050   0.100   0.200
+        0.000   0.467   0.500   0.633   0.717   0.800
+        0.020   0.467   0.500   0.617   0.700   0.800
+        0.050   0.467   0.483   0.617   0.700   0.800
+        0.100   0.483   0.467   0.600   0.683   0.800
+        0.200   0.550   0.600   0.600   0.700   0.783
+
+  EWMA: mean error ratio (ewma/raw)  [>1 = HARMS]  (rows: delta trend; cols: rho jitter)
+    delta\rho   0.000   0.020   0.050   0.100   0.200
+        0.000   0.718   0.700   0.696   0.698   0.702
+        0.020   0.740   0.714   0.704   0.704   0.705
+        0.050   0.845   0.785   0.739   0.722   0.714
+        0.100   1.140   0.998   0.850   0.775   0.735
+        0.200   1.776   1.506   1.146   0.925   0.800
+
+  EWMA: win rate  (rows: delta trend; cols: rho jitter)
+    delta\rho   0.000   0.020   0.050   0.100   0.200
+        0.000   0.983   0.983   0.983   0.967   0.933
+        0.020   0.933   0.967   0.967   0.950   0.933
+        0.050   0.850   0.883   0.883   0.933   0.933
+        0.100   0.367   0.517   0.817   0.850   0.883
+        0.200   0.083   0.167   0.433   0.633   0.817
+
+  wrote phase_{null,ewma}_{ratio,win}.csv (Fig.4 source)
+  ewma worst (max ratio) = 1.776
+  Check: null<=1 everywhere & ~flat in delta?  ewma>1 at high delta/low rho?

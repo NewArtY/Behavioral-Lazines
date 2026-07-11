@@ -1,0 +1,28 @@
+==========================================================================
+SHOTS2: narrow-preparation multi-shot aggregates, excited-cell gap
+(benchmark = Ulam at the SAME discretisation; target = Lambda)
+==========================================================================
+
+-- n=8, dt=0.6:  Ulam(same grid)=0.161 (ratio 0.22), analytic Lambda=0.720 --
+   M  cells prior  Lam_act  ratio  vs_Ulam     resid
+   8      5   min    0.000   0.00     0.00  1.04e-01
+   8      5  lazy   -0.000  -0.00    -0.00  1.04e-01
+  16      7   min    0.000   0.00     0.00  1.61e-01
+  16      7  lazy    0.000   0.00     0.00  1.61e-01
+  32      7   min    0.236   0.33     1.47  2.39e-01
+  32      7  lazy    0.011   0.02     0.07  2.39e-01
+  64      7   min    0.239   0.33     1.49  3.17e-01
+  64      7  lazy    0.009   0.01     0.05  3.17e-01
+
+-- n=24, dt=1.2:  Ulam(same grid)=0.681 (ratio 0.95), analytic Lambda=0.720 --
+   M  cells prior  Lam_act  ratio  vs_Ulam     resid
+   8     10   min    0.000   0.00     0.00  1.32e-01
+   8     10  lazy   -0.000  -0.00    -0.00  1.32e-01
+  16     15   min    0.000   0.00     0.00  1.81e-01
+  16     15  lazy    0.000   0.00     0.00  1.81e-01
+  32     18   min    0.146   0.20     0.22  2.40e-01
+  32     18  lazy    0.007   0.01     0.01  2.40e-01
+  64     18   min    0.096   0.13     0.14  3.14e-01
+  64     18  lazy    0.000   0.00     0.00  3.14e-01
+[time] shots2: 184.3 s
+

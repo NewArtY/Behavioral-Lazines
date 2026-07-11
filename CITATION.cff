@@ -21,9 +21,15 @@ authors:
     orcid: "https://orcid.org/0000-0001-6736-4691"
     email: artiom1989@mail.ru
     affiliation: "Kuban State University, Krasnodar, Russia"
-version: "1.1.0"
-date-released: "2026-07-05"
+version: "1.2.0"
+date-released: "2026-07-11"
 license: MIT
+repository-code: "https://github.com/NewArtY/Behavioral-Lazines"
+url: "https://github.com/NewArtY/Behavioral-Lazines"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.21140416"
+    description: "Concept DOI — all versions; always resolves to the latest release"
 keywords:
   - inverse problem
   - Tikhonov regularization
@@ -39,9 +45,9 @@ keywords:
   - reproducibility
   - labour-market segmentation
   - radiation reaction
-# repository-code: "https://github.com/<user>/behavioral-laziness"  # TODO: set after publishing to GitHub
-# url: "https://github.com/<user>/behavioral-laziness"              # TODO
-# doi: "10.5281/zenodo.XXXXXXX"        # TODO: fill with the Zenodo concept DOI after the first release
+# Version-specific DOIs (Zenodo): 1.0.0 -> 10.5281/zenodo.21140417,
+# 1.1.0 -> 10.5281/zenodo.21209070, 1.2.0 -> assigned on release under the concept
+# DOI above. The concept DOI in `identifiers` always resolves to the latest version.
 #
 # Once the article is published/accepted, uncomment and complete the block below
 # (add volume/issue/pages/doi) so citations resolve to the paper, not the archive:

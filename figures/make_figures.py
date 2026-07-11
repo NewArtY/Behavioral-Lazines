@@ -78,6 +78,23 @@ plt.rcParams.update({
     "figure.dpi": 120,
 })
 
+# RU decimal comma: locale-driven tick labels + explicit helper for f-strings.
+if LANG == "ru":
+    import locale
+    for loc in ("Russian_Russia", "ru_RU.UTF-8", "ru_RU"):
+        try:
+            locale.setlocale(locale.LC_NUMERIC, loc)
+            plt.rcParams["axes.formatter.use_locale"] = True
+            break
+        except locale.Error:
+            continue
+
+
+def _num(x, fmt="g"):
+    """Format a number, decimal comma in the RU figures."""
+    s = format(x, fmt)
+    return s.replace(".", ",") if LANG == "ru" else s
+
 
 def _panel(ax, i):
     """Bold panel label (а)/(б)/... just above the top-left corner of the axes."""
@@ -180,8 +197,8 @@ def ris4():
                                 EXP / "phase_ewma_ratio.csv") if not p.exists()]
     if missing:
         print(f"  [ris4] SKIPPED: missing {', '.join(missing)} in {EXP}.\n"
-              f"        Run `python phase_map.py` first to generate the "
-              f"phase-map CSVs, then re-run this script.")
+              f"        Regenerate with `python ../experiments/phase_map_struct.py` "
+              f"(needs the solver) or restore the committed CSVs, then re-run.")
         return
     dn, cn, Gn = _read_grid(EXP / "phase_null_ratio.csv")
     de, ce, Ge = _read_grid(EXP / "phase_ewma_ratio.csv")
@@ -189,8 +206,8 @@ def ris4():
     for k, (ax, G, cols, deltas) in enumerate((
             (ax1, Gn, cn, dn), (ax2, Ge, ce, de))):
         im = ax.imshow(G, origin="lower", cmap="RdBu_r", vmin=0.4, vmax=1.6, aspect="auto")
-        ax.set_xticks(range(len(cols))); ax.set_xticklabels([f"{c:g}" for c in cols])
-        ax.set_yticks(range(len(deltas))); ax.set_yticklabels([f"{d:g}" for d in deltas])
+        ax.set_xticks(range(len(cols))); ax.set_xticklabels([_num(c) for c in cols])
+        ax.set_yticks(range(len(deltas))); ax.set_yticklabels([_num(d) for d in deltas])
         ax.set_xlabel(r"$\rho$")
         ax.set_ylabel(r"$\delta$")
         _panel(ax, k)
@@ -198,7 +215,7 @@ def ris4():
             for j in range(G.shape[1]):
                 # white digits on the dark ends of the RdBu_r scale (readability)
                 dark = abs(G[i, j] - 1.0) > 0.35
-                ax.text(j, i, f"{G[i,j]:.2f}", ha="center", va="center",
+                ax.text(j, i, _num(G[i, j], ".2f"), ha="center", va="center",
                         fontsize=9, color="white" if dark else "black")
     fig.colorbar(im, ax=[ax1, ax2], fraction=0.045, pad=0.02,
                  label=_("отношение ошибок\n(сглаж./исходное)", "error ratio\n(smoothed / raw)"))
